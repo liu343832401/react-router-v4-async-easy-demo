@@ -1,0 +1,10 @@
+html, body {
+  height: 100%;
+}
+body {
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+#app, .container {
+  height: 100%;
+}
