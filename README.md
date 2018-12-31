@@ -1,4 +1,4 @@
-# react-router-v4-easy-async-demo
+# react-router-v4-async-easy-demo
 a best and easy async load components by react-router4`s demo
 
 ### 一个简单且实用的基于redux和react-router-v4的按需加载路由组件的demo。
