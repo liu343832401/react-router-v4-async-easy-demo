@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 /**
  * Create Async Route Class
+ * 按需加载路由中的组件
  * @param props
  * @returns {*}
  * @constructor
@@ -74,25 +75,28 @@ class CreateAsyncRouteComponent extends React.Component {
 }
 
 export const AndChildAsyncRoute = (props) => {
-  let { routes, path } = props
+  let { routes, path, history } = props
   return (
     <>
       { routes.map((route, i) => (
         <AsyncRoute key={ i } { ...route } />
       )) }
-      <Route
-        path={ path }
-        exact
-        render={ () => {
-          return <Redirect to={ routes[0].path }/>
-        } }
-      />
+      {
+        history.location.pathname === path &&
+        <Route
+          path={ path }
+          exact
+          render={ () => {
+            return <Redirect to={ routes[0].path }/>
+          } }
+        />
+      }
     </>
   )
 }
 
 const AsyncRoute = withRouter(connect((state) => {
   return { $path: state.$path }
-})((props) => (<CreateAsyncRouteComponent { ...props }/>)))
+})(CreateAsyncRouteComponent))
 
 export default AsyncRoute
